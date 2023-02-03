@@ -1,4 +1,4 @@
-const cashRegister = (price, cash, cid) => {
+let cashRegister = (price, cash, cid) => {
 
   const currencyObj = {
     "PENNY": 0.01,
@@ -12,9 +12,12 @@ const cashRegister = (price, cash, cid) => {
     "ONE HUNDRED": 100.00
   }
 
+  cash = parseFloat(cash)
+  price = parseFloat(price)
+
   //1. cash is less than price
     if (cash < price) {
-            return {
+            return obj = {
             status: "INCORRECT_PAYMENT",
             change: []
         }
@@ -33,13 +36,13 @@ const cashRegister = (price, cash, cid) => {
 
   //2a. cid (cash-in-drawer) is less than the change due
   if (changeNeeded > cidTotal) {
-    return { status: "INSUFFICIENT_FUNDS", change: answer };
+    return obj = { status: "INSUFFICIENT_FUNDS", change: answer };
 
 //********************************
 
   //3. If cid is exactly equal to the change due.
   } else if (changeNeeded.toFixed(2) === cidTotal) {
-    return { status: "CLOSED", change: cid };
+    return obj = { status: "CLOSED", change: cid };
 
     
   //4a. & 4b. All other cases: change due is less than the total cid, and exact change can be made
@@ -69,18 +72,74 @@ const cashRegister = (price, cash, cid) => {
   }
 
     answer = answer.reverse()
-  return { status: "OPEN", change: answer};
+  return obj = { status: "OPEN", change: answer};
 }
 
-// Example function call
-console.log(cashRegister(19.5, 20, [
-  ["PENNY", 1.01],
-  ["NICKEL", 2.05],
-  ["DIME", 3.1],
-  ["QUARTER", 4.25],
-  ["ONE", 90],
-  ["FIVE", 55],
-  ["TEN", 20],
-  ["TWENTY", 60],
-  ["ONE HUNDRED", 100],
-]));
+// Example function call (Adding it to HTML)
+
+let priceId = document.getElementById("price")
+let cashId = document.getElementById("cash")
+let outputId = document.getElementById("output")
+let changeDue = document.querySelector('button')
+
+changeDue.addEventListener('click', () => {
+  console.log(cashRegister(priceId.value, cashId.value, cid=[
+    ["PENNY", 1.01],
+    ["NICKEL", 2.05],
+    ["DIME", 3.1],
+    ["QUARTER", 4.25],
+    ["ONE", 90],
+    ["FIVE", 55],
+    ["TEN", 20],
+    ["TWENTY", 60],
+    ["ONEHUNDRED", 100]
+    ]));
+
+    const currencyObj = {
+      "PENNY": 0.01,
+      "NICKEL": 0.05,
+      "DIME": 0.10,
+      "QUARTER": 0.25,
+      "ONE": 1.00,
+      "FIVE": 5.00,
+      "TEN": 10.00,
+      "TWENTY": 20.00,
+      "ONE HUNDRED": 100.00
+    }
+
+    if (priceId.value === cashId.value) {
+      outputId.innerHTML = "Nothing To Return";
+    }
+
+    if (obj.status === "OPEN") {
+
+    let howMany = obj.change[0][1] / currencyObj[obj.change[0][0]] // The First Result
+    // obj - is the result from the cashRegister calcuation ^^ (it also console logs in browser)
+
+    let outputSentence = `Give The Customer: 
+    <br></br>${howMany} ${obj.change[0][0]}<br></br>`
+    if (howMany > 1) {
+      outputSentence = `Give The Customer: 
+      <br></br>${howMany} ${obj.change[0][0]}S<br></br>` // Plural
+    }
+
+    // In Case There Is More Change Needed
+
+    for (let i = 1; i < obj.change.length; i++) {
+      let howMuch = obj.change[i][1]
+      let howMany = howMuch / (currencyObj[obj.change[i][0]])
+
+      // Plural
+      if (howMany > 1) {
+        outputSentence += `${howMany} ${obj.change[i][0]}S<br></br>`
+      } else {
+        outputSentence += `${howMany} ${obj.change[i][0]}<br></br>`
+      }
+    }
+
+    outputId.innerHTML = outputSentence
+
+  } else {
+    outputId.innerHTML = obj.status
+  }
+})
