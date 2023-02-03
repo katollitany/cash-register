@@ -107,6 +107,12 @@ changeDue.addEventListener('click', () => {
       "ONE HUNDRED": 100.00
     }
 
+    if (priceId.value == "" || cashId.value == ""){
+      outputId.innerHTML = "Field Not Specified"  
+    }
+    // if (priceId.value == false && cashId.value == false){
+    //   outputId.innerHTML = "Fields Not Specified"}
+
     if (priceId.value === cashId.value) {
       outputId.innerHTML = "Nothing To Return";
     }

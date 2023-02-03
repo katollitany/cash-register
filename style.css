@@ -1,0 +1,46 @@
+body{
+    text-align: center;
+    font-family: Varela;
+    background: linear-gradient(lightblue ,white);
+    height: 100vh;
+}
+
+
+@font-face{
+    font-family: Varela;
+    src: url(assets/varela/VarelaRound.ttf)
+}
+
+
+#button{
+    font-family: Varela;
+    background-color: green;
+    color: white;
+    padding: 0.6em;
+}
+
+#button:hover{
+    box-shadow: 2px 2px 2px black;
+}
+
+#title{
+    text-decoration:2px solid underline;
+    letter-spacing: 4px;
+    position: relative;
+    animation: text 3s 1;
+}
+
+#output{
+    font-size: x-large;
+}
+
+@keyframes text {
+    0%{
+    }
+    30%{
+      letter-spacing: 1px;
+    }
+    85%{
+      letter-spacing: 4px;
+    }
+  }

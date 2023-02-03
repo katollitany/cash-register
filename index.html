@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
+
 <body>
-    <h1>Welcome</h1>
+
+    <h1 id="title">Try out our Cash Register!</h1>
     <label for="price">Price Of Items: </label>
-    <input type="number" id="price" name="price">
+    <input type="number" id="price" name="price" required>
     
     <br><br>
     <label for="cash">Customers Cash:</label>
-    <input type="number" id="cash" name="cash">
+    <input type="number" id="cash" name="cash" required>
     <br><br>
 
-    <button>Change Due</button>
+    <button id="button">Change Due</button>
 
     <p id="output"></p>
     
     <script src="script.js"></script>
+
+
 </body>
 </html>
